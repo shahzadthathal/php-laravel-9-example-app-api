@@ -14,6 +14,9 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Category::factory(10)->create();
+        //To avoid duplicate entry exception used try catch block
+        try{
+            \App\Models\Category::factory(5)->create();
+        }catch(\Throwable $e){}
     }
 }

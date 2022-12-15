@@ -3,12 +3,14 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Http\Traits\SlugTrait;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
  */
 class PostFactory extends Factory
 {
+    use SlugTrait;
+
     /**
      * Define the model's default state.
      *
@@ -17,7 +19,7 @@ class PostFactory extends Factory
     public function definition()
     {
         $title = $this->faker->title;
-        $slug = str_replace(' ','-',$title);
+        $slug = $this->generateSlug($title);
         $catsArr = [1,2,3,4,5,6,7,8,9,10];
         return [
             'title' => $title,

@@ -14,7 +14,10 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Post::factory(20)->create();
+        //To avoid duplicate slug entry exception used try catch block
+        try{
+            \App\Models\Post::factory(20)->create();
+        }catch(\Throwable $e){}
 
     }
 }
