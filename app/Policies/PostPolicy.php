@@ -41,7 +41,8 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        //
+        //If user role is admin then he can create post
+        return $user->role === 1;
     }
 
     /**
@@ -53,7 +54,8 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        //
+        //If user role is admin then he can update post
+        return $user->role === 1;
     }
 
     /**
@@ -65,7 +67,8 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        //
+        //If user role is admin then he can delete post
+        return $user->role === 1;
     }
 
     /**
@@ -77,7 +80,8 @@ class PostPolicy
      */
     public function restore(User $user, Post $post)
     {
-        //
+        //If user role is admin then he can restore
+        return $user->role === 1;
     }
 
     /**
@@ -89,6 +93,7 @@ class PostPolicy
      */
     public function forceDelete(User $user, Post $post)
     {
-        //
+        //If user role is admin then he can delete post
+        return $user->role === 1;
     }
 }

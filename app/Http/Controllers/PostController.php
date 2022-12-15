@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\PostCollection;
+
 
 class PostController extends Controller
 {
@@ -15,7 +19,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return new PostCollection(Post::paginate());
     }
 
     /**
@@ -45,9 +49,9 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Post $post, $id)
     {
-        //
+        return new PostResource(Post::findOrFail($id));
     }
 
     /**

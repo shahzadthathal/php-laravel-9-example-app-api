@@ -41,7 +41,8 @@ class CategoryPolicy
      */
     public function create(User $user)
     {
-        //
+        //If user role is admin then he can create
+        return $user->role === 1;
     }
 
     /**
@@ -53,7 +54,8 @@ class CategoryPolicy
      */
     public function update(User $user, Category $category)
     {
-        //
+        //If user role is admin then he can update
+        return $user->role === 1;
     }
 
     /**
@@ -65,7 +67,8 @@ class CategoryPolicy
      */
     public function delete(User $user, Category $category)
     {
-        //
+        //If user role is admin then he can delete
+        return $user->role === 1;
     }
 
     /**
@@ -77,7 +80,8 @@ class CategoryPolicy
      */
     public function restore(User $user, Category $category)
     {
-        //
+        //If user role is admin then he can create
+        return $user->role === 1;
     }
 
     /**
@@ -89,6 +93,7 @@ class CategoryPolicy
      */
     public function forceDelete(User $user, Category $category)
     {
-        //
+        //If user role is admin then he can delete
+        return $user->role === 1;
     }
 }
