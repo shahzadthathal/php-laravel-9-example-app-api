@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
@@ -40,7 +41,10 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        if (! Gate::allows('create-post', $post)) {
+            abort(403);
+        }
+        $validated = $request->validated();
     }
 
     /**
@@ -74,7 +78,11 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        if (! Gate::allows('update-post', $post)) {
+            abort(403);
+        }
+
+        $validated = $request->validated();
     }
 
     /**
