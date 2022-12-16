@@ -73,7 +73,27 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+        
+                        <div class="col-md-2">   
+                            <ul class="list-group">
+                                <li class="list-group-item active">Sidebar</li>
+                                <li class="list-group-item"><a href="{{ route('posts.index') }}">Manage Posts</a></li>
+                                <li class="list-group-item"><a href="{{ route('categories.index') }}">Manage Categories</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-10">
+                            @yield('content')
+                        </div>
+        
+                    </div>
+                </div>
+            </div>
+
         </main>
     </div>
 </body>

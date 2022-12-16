@@ -6,9 +6,12 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Http\Traits\DataTrait;
 
 class CategoryController extends Controller
 {
+    use DataTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +19,15 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        // Get data using Trait method
+        $model = $this->getData(new Category());
+
+        //$model = Category::orderBy('id', 'desc'); 
+        //$model = $model->paginate(15);
+        //Append query parameters in pagination links
+        //$model->appends(request()->input())->links();
+
+        return view('categories.index')->with(['model'=>$model]);
     }
 
     /**

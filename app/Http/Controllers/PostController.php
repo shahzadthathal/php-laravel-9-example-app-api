@@ -9,10 +9,12 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\PostCollection;
-
+use App\Http\Traits\DataTrait;
 
 class PostController extends Controller
 {
+    use DataTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +22,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        return new PostCollection(Post::paginate());
+        // Get data using Trait method
+        $model = $this->getData(new Post());
+        return view('posts.index')->with(['model'=>$model]);
+
+        //return new PostCollection(Post::paginate());
     }
 
     /**
