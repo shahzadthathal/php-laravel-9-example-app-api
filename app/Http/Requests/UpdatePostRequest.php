@@ -13,7 +13,8 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        //authorized user validation is done in Controller constructer
+        return true;
     }
 
     /**

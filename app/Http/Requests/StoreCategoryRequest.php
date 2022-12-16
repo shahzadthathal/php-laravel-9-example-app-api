@@ -13,7 +13,9 @@ class StoreCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        //return $this->user()->can('create', $this->category);
+        //authorized user validation is done in Controller constructer
+        return true;
     }
 
     /**
@@ -24,7 +26,7 @@ class StoreCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|unique:categories|max:255',
+            'name' => 'required|unique:categories|max:255',
         ];
     }
 }

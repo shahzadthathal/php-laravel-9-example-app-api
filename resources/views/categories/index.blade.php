@@ -30,8 +30,8 @@
                                   <td>{{$loop->iteration}}</td>
                                   <td>{{$item->name}}</td>
                                   <td>{{$item->slug}}</td>
-                                  <td><a title="Show"  href="{{ route('category.show', $item->id) }}"><i class="nc-icon nc-align-center"></i> </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a title="Edit"  href="{{ route('category.edit', $item->id) }}"><i class="fa  fa-pencil-square-o"></i> </a>
+                                  <td><a title="Show"  href="{{ route('category.show', $item->id) }}">Show </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a title="Edit"  href="{{ route('category.edit', $item->id) }}">Edit </a>
                                     {{ Form::open(['method' => 'DELETE','route' => ['category.destroy', $item->id], 'onsubmit' => 'return confirmDelete()' ]) }}
                                     {{ Form::submit('Delete', ['class' => 'nc-icon nc-align-center','style'=>' border:none; cursor:pointer;']) }}
 

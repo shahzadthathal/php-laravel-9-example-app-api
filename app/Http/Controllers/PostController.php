@@ -10,6 +10,7 @@ use App\Models\Post;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\PostCollection;
 use App\Http\Traits\DataTrait;
+use App\Http\Traits\SlugTrait;
 
 class PostController extends Controller
 {
@@ -53,10 +54,13 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        if (! Gate::allows('create-post', $post)) {
-            abort(403);
-        }
+        // The incoming request is valid...
+ 
+        // Retrieve the validated input data...
         $validated = $request->validated();
+    
+        // Retrieve a portion of the validated input data...
+        $validated = $request->safe()->only(['title', 'description']);
     }
 
     /**

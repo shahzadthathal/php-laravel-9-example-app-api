@@ -7,10 +7,12 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Http\Traits\DataTrait;
+use App\Http\Traits\SlugTrait;
 
 class CategoryController extends Controller
 {
     use DataTrait;
+    use SlugTrait;
 
 
     public function __construct() {
@@ -50,7 +52,19 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $validated = $request->validated();
+        
+        // The incoming request is valid...
+ 
+        // Retrieve the validated input data...
+        //$validated = $request->validated();
+
+        //$validated = $request->safe()->all();
+    
+        // Retrieve a portion of the validated input data...
+        $validated = $request->safe()->only('name');
+        $validated['slug'] = $this->generateSlug($validated['name']);
+        Category::create($validated);
+        return redirect()->route('category.index');
     }
 
     /**
@@ -61,7 +75,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('categories.show')->with(compact('category'));
     }
 
     /**
@@ -72,7 +86,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('categories.edit')->with(compact('category'));
     }
 
     /**
@@ -84,7 +98,12 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $validated = $request->validated();
+        
+        $validated = $request->safe()->only('name');
+        $category->name = $validated['name'];
+        $category->slug = $this->generateSlug($validated['name']);
+        $category->save();
+        return redirect()->route('category.index');
     }
 
     /**
@@ -95,6 +114,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        Category::destroy($category->id);
+        return redirect()->route('category.index');
     }
 }

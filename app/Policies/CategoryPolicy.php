@@ -45,7 +45,8 @@ class CategoryPolicy
     public function create(User $user)
     {
         //If user role is admin then he can create
-        return $user->role === 1;
+        //return $user->role == 1 ? Response::allow() : false;
+        return Response::allow();
     }
 
     /**
