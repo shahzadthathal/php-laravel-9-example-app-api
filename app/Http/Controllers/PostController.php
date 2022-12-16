@@ -15,6 +15,7 @@ use App\Http\Traits\SlugTrait;
 class PostController extends Controller
 {
     use DataTrait;
+    use SlugTrait;
 
     public function __construct() {
         //Post model and post route
@@ -32,8 +33,6 @@ class PostController extends Controller
         // Get data using Trait method
         $model = $this->getData(new Post());
         return view('posts.index')->with(['model'=>$model]);
-
-        //return new PostCollection(Post::paginate());
     }
 
     /**
@@ -43,7 +42,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -57,10 +56,13 @@ class PostController extends Controller
         // The incoming request is valid...
  
         // Retrieve the validated input data...
-        $validated = $request->validated();
+        //$validated = $request->validated();
     
         // Retrieve a portion of the validated input data...
         $validated = $request->safe()->only(['title', 'description']);
+        $validated['slug'] = $this->generateSlug($validated['title']);
+        Post::create($validated);
+        return redirect()->route('post.index');
     }
 
     /**
@@ -69,9 +71,9 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post, $id)
+    public function show(Post $post)
     {
-        return new PostResource(Post::findOrFail($id));
+        return view('posts.show')->with(compact('post'));
     }
 
     /**
@@ -82,7 +84,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit')->with(compact('post'));
     }
 
     /**
@@ -94,11 +96,13 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        if (! Gate::allows('update-post', $post)) {
-            abort(403);
-        }
+        $validated = $request->safe()->only(['title', 'description']);
+        $post->title = $validated['title'];
+        $post->slug = $this->generateSlug($validated['title']);
+        $post->description = $validated['description'];
+        $post->save();
+        return redirect()->route('post.index');
 
-        $validated = $request->validated();
     }
 
     /**
@@ -109,6 +113,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        Post::destroy($post->id);
+        return redirect()->route('post.index');
     }
 }

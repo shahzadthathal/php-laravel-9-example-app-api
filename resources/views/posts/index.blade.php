@@ -34,8 +34,8 @@
                                   <td>{{$item->slug}}</td>
                                   <td>{{$item->description}}</td>
                                   <td>{{$item->created_at}} | {{$item->updated_at}}</td>
-                                  <td><a title="Show"  href="{{ route('post.show', $item->id) }}"><i class="nc-icon nc-align-center"></i> </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                      <a title="Edit"  href="{{ route('post.edit', $item->id) }}"><i class="fa  fa-pencil-square-o"></i> </a>
+                                  <td><a title="Show"  href="{{ route('post.show', $item->id) }}">Show </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                      <a title="Edit"  href="{{ route('post.edit', $item->id) }}">Edit </a>
                                       {{ Form::open(['method' => 'DELETE','route' => ['post.destroy', $item->id], 'onsubmit' => 'return confirmDelete()' ]) }}
                                       {{ Form::submit('Delete', ['class' => 'nc-icon nc-align-center','style'=>' border:none; cursor:pointer;']) }}
                                   </td>

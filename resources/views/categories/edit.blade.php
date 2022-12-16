@@ -37,12 +37,9 @@
                    
                 </div>
               
-               
-
-                   
-                        <div class="form-group mt-3">
-                            <button type="submit" class="btn btn-info btn-fill pull-right point">Update Category</button>
-                        </div>
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-info btn-fill pull-right point">Update Category</button>
+                </div>
                     
                 {{ Form::close() }} 
                 <div class="clearfix"></div>
