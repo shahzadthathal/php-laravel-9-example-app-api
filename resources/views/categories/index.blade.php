@@ -4,7 +4,9 @@
               <div class="card strpied-tabled-with-hover">
                   <div class="card-header ">
                       <h4 class="card-title">Categories</h4>
-                      <a href="{{ route('categories.create') }}" class="btn btn-info btn-fill pull-right"><i class="nc-icon nc-simple-add"></i> Add New Category</a>
+                      @can('create', \App\Models\Post::class)
+                      <a href="{{ route('category.create') }}" class="btn btn-info btn-fill pull-right"><i class="nc-icon nc-simple-add"></i> Add New Category</a>
+                      @endcan
                       <p class="card-category">List of all category</p>
                   </div>
                   @foreach (['danger', 'warning', 'success', 'info'] as $key)
@@ -28,9 +30,9 @@
                                   <td>{{$loop->iteration}}</td>
                                   <td>{{$item->name}}</td>
                                   <td>{{$item->slug}}</td>
-                                  <td><a title="Show"  href="{{ route('categories.show', $item->id) }}"><i class="nc-icon nc-align-center"></i> </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a title="Edit"  href="{{ route('categories.edit', $item->id) }}"><i class="fa  fa-pencil-square-o"></i> </a>
-                                    {{ Form::open(['method' => 'DELETE','route' => ['categories.destroy', $item->id], 'onsubmit' => 'return confirmDelete()' ]) }}
+                                  <td><a title="Show"  href="{{ route('category.show', $item->id) }}"><i class="nc-icon nc-align-center"></i> </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a title="Edit"  href="{{ route('category.edit', $item->id) }}"><i class="fa  fa-pencil-square-o"></i> </a>
+                                    {{ Form::open(['method' => 'DELETE','route' => ['category.destroy', $item->id], 'onsubmit' => 'return confirmDelete()' ]) }}
                                     {{ Form::submit('Delete', ['class' => 'nc-icon nc-align-center','style'=>' border:none; cursor:pointer;']) }}
 
                                   </td>

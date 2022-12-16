@@ -12,20 +12,22 @@ class CategoryController extends Controller
 {
     use DataTrait;
 
+
+    public function __construct() {
+        $this->authorizeResource(Category::class, 'category');
+        // Category::class is the model to lookup the policy
+        // category - parameter name, explained w/ can middleware
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Category $category)
     {
         // Get data using Trait method
         $model = $this->getData(new Category());
-
-        //$model = Category::orderBy('id', 'desc'); 
-        //$model = $model->paginate(15);
-        //Append query parameters in pagination links
-        //$model->appends(request()->input())->links();
 
         return view('categories.index')->with(['model'=>$model]);
     }
@@ -37,7 +39,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**

@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Gate;
 
 
 use App\Policies\PostPolicy;
+use App\Models\Post;
 use App\Policies\CategoryPolicy;
+use App\Models\Category;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -19,8 +21,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        'App\Models\Post' => 'App\Policies\PostPolicy',
-        'App\Models\Category' => 'App\Policies\CategoryPolicy',
+        Post::class => PostPolicy::class,
+        Category::class => CategoryPolicy::class,
     ];
 
     /**

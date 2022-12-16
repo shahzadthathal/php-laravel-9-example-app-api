@@ -15,6 +15,12 @@ class PostController extends Controller
 {
     use DataTrait;
 
+    public function __construct() {
+        //Post model and post route
+        $this->authorizeResource(Post::class, 'post');
+    }
+
+
     /**
      * Display a listing of the resource.
      *

@@ -81,8 +81,8 @@
                         <div class="col-md-2">   
                             <ul class="list-group">
                                 <li class="list-group-item active">Sidebar</li>
-                                <li class="list-group-item"><a href="{{ route('posts.index') }}">Manage Posts</a></li>
-                                <li class="list-group-item"><a href="{{ route('categories.index') }}">Manage Categories</a></li>
+                                <li class="list-group-item"><a href="{{ route('post.index') }}">Manage Posts</a></li>
+                                <li class="list-group-item"><a href="{{ route('category.index') }}">Manage Categories</a></li>
                             </ul>
                         </div>
 

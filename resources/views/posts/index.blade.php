@@ -7,7 +7,7 @@
               <div class="card strpied-tabled-with-hover">
                   <div class="card-header ">
                       <h4 class="card-title">Posts</h4>
-                      <a href="{{ route('posts.create') }}" class="btn btn-info btn-fill pull-right"><i class="nc-icon nc-simple-add"></i> Add New Post</a>
+                      <a href="{{ route('post.create') }}" class="btn btn-info btn-fill pull-right"><i class="nc-icon nc-simple-add"></i> Add New Post</a>
                       <p class="card-category">List of all posts</p>
                       
                   </div>
@@ -34,9 +34,9 @@
                                   <td>{{$item->slug}}</td>
                                   <td>{{$item->description}}</td>
                                   <td>{{$item->created_at}} | {{$item->updated_at}}</td>
-                                  <td><a title="Show"  href="{{ route('posts.show', $item->id) }}"><i class="nc-icon nc-align-center"></i> </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                      <a title="Edit"  href="{{ route('posts.edit', $item->id) }}"><i class="fa  fa-pencil-square-o"></i> </a>
-                                      {{ Form::open(['method' => 'DELETE','route' => ['posts.destroy', $item->id], 'onsubmit' => 'return confirmDelete()' ]) }}
+                                  <td><a title="Show"  href="{{ route('post.show', $item->id) }}"><i class="nc-icon nc-align-center"></i> </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                      <a title="Edit"  href="{{ route('post.edit', $item->id) }}"><i class="fa  fa-pencil-square-o"></i> </a>
+                                      {{ Form::open(['method' => 'DELETE','route' => ['post.destroy', $item->id], 'onsubmit' => 'return confirmDelete()' ]) }}
                                       {{ Form::submit('Delete', ['class' => 'nc-icon nc-align-center','style'=>' border:none; cursor:pointer;']) }}
                                   </td>
                                 </tr>
